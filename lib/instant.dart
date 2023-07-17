@@ -15,7 +15,10 @@ class GetItInstant extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
-        Get.to(const ItemDetails());
+        Get.to(
+          const ItemDetails(),
+          transition: Transition.downToUp,
+        );
       },
       child: Container(
         margin: const EdgeInsets.symmetric(

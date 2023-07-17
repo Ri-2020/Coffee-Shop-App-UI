@@ -16,7 +16,10 @@ class PopularBeverages extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(const ItemDetails());
+        Get.to(
+          const ItemDetails(),
+          transition: Transition.downToUp,
+        );
       },
       child: Container(
         margin: EdgeInsets.symmetric(
