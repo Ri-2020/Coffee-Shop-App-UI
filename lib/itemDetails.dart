@@ -10,10 +10,11 @@ class ItemDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      padding: const EdgeInsets.only(bottom: 30),
+      // padding: const EdgeInsets.only(bottom: 30),
+      // height: height,
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("assets/images/backimage.png"),
@@ -24,16 +25,17 @@ class ItemDetails extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox(
-              height: Get.height + 300,
+              height: width < 400 ? height + 500 : height + 300,
+              // height: double.minPositive,
             ),
             Image.asset(
               "assets/images/cup.png",
-              height: height,
+              height: height * 0.4,
               width: width,
               fit: BoxFit.cover,
             ),
             Positioned(
-              top: 380,
+              top: height * 0.38,
               child: Container(
                 width: width - 40,
                 margin: const EdgeInsets.all(20),
@@ -167,23 +169,27 @@ class ItemDetails extends StatelessWidget {
                       height: 10,
                     ),
                     Row(
-                      children: const [
+                      children: [
                         Choice(
                           title: "Full",
                           isSelected: true,
+                          width: width,
                         ),
                         Choice(
                           title: "1/2 Full",
+                          width: width,
                         ),
                         Choice(
                           title: "3/4 Full",
+                          width: width,
                         ),
                         Choice(
                           title: "1/4 Full",
+                          width: width,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     const Text(
@@ -197,45 +203,52 @@ class ItemDetails extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "Skim Milk",
                           isSelected: true,
+                          screenWidth: width,
                         ),
                         Option(
                           milk: "Full Cream Milk",
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "Almond Milk",
+                          screenWidth: width,
                         ),
                         Option(
                           milk: "Full Cream Milk",
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "Soy Milk",
+                          screenWidth: width,
                         ),
                         Option(
                           milk: "Oat Milk",
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "Lactose free Milk",
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     const Text(
@@ -249,35 +262,39 @@ class ItemDetails extends StatelessWidget {
                     const SizedBox(
                       height: 10,
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "Sugar X1",
+                          screenWidth: width,
                         ),
                         Option(
                           milk: "Sugar X2",
                           isSelected: true,
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    Row(
+                    Wrap(
                       children: [
                         Option(
                           milk: "1/2 Sugar",
+                          screenWidth: width,
                         ),
                         Option(
                           milk: "No Sugar",
+                          screenWidth: width,
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
                       height: 80,
                       width: double.infinity,
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: width < 400 ? 5 : 10, vertical: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.black12,
@@ -305,10 +322,10 @@ class ItemDetails extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              const Text(
+                              Text(
                                 "High Priority ",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: width < 400 ? 10 : 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w200,
                                 ),
@@ -324,7 +341,7 @@ class ItemDetails extends StatelessWidget {
                             ],
                           ),
                           Container(
-                            width: 100,
+                            width: width < 400 ? 70 : 100,
                             padding: EdgeInsets.symmetric(vertical: 10),
                             decoration: BoxDecoration(
                                 color: Colors.green,
@@ -332,6 +349,9 @@ class ItemDetails extends StatelessWidget {
                             child: Text(
                               "Submit",
                               textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: width < 400 ? 10 : null,
+                              ),
                             ),
                           )
                         ],
@@ -356,12 +376,18 @@ class ItemDetails extends StatelessWidget {
 class Choice extends StatelessWidget {
   final String title;
   final bool isSelected;
-  const Choice({super.key, required this.title, this.isSelected = false});
+  final double width;
+  const Choice(
+      {super.key,
+      required this.title,
+      this.isSelected = false,
+      required this.width});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding:
+          EdgeInsets.symmetric(horizontal: width < 350 ? 5 : 15, vertical: 5),
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         color: isSelected ? Colors.green : Colors.white,
@@ -371,7 +397,11 @@ class Choice extends StatelessWidget {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: width < 400
+                ? width < 350
+                    ? 10
+                    : 12
+                : 15,
             color: isSelected ? Colors.white : Colors.black,
           ),
         ),
@@ -383,12 +413,17 @@ class Choice extends StatelessWidget {
 class Option extends StatelessWidget {
   final String milk;
   final bool isSelected;
-  const Option({super.key, required this.milk, this.isSelected = false});
+  final double screenWidth;
+  const Option(
+      {super.key,
+      required this.milk,
+      this.isSelected = false,
+      required this.screenWidth});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width * 0.40,
+      width: screenWidth < 400 ? null : Get.width * 0.40,
       child: Row(
         children: [
           Switch(value: isSelected, onChanged: (val) {}),

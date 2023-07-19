@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
         ),
         child: Center(
           child: Container(
-            width: width * 0.8,
+            width: width < 500 ? width * 0.8 : 420,
             height: height * 0.8,
             decoration: BoxDecoration(
               border: Border.all(
@@ -82,8 +82,7 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       enabledBorder: UnderlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Color.fromARGB(255, 22, 10, 10)),
+                        borderSide: BorderSide(color: Colors.grey),
                       ),
                       hintText: "User Name",
                       hintStyle: TextStyle(
@@ -142,16 +141,17 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const HomePage());
+                  },
                   child: Container(
                     padding: EdgeInsets.all(10),
                     width: 200,
                     decoration: BoxDecoration(
-                        // gradient: const LinearGradient(colors: [
-                        //   Color.fromARGB(255, 77, 27, 42),
-                        //   Color.fromARGB(255, 167, 116, 90),
-                        // ]),
                         border: Border.all(
                           width: 1,
                           color: Colors.white,

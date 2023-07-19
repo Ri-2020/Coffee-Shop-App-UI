@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                           return const PopularBeverages(
                               image: "assets/images/coffee1.png");
                         },
-                        itemCount: 3,
+                        itemCount: 10,
                       ),
                     ),
                     SizedBox(
@@ -208,42 +208,45 @@ class _HomePageState extends State<HomePage> {
           Positioned(
             bottom: 20,
             width: width,
-            child: Container(
-              color: Colors.transparent,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Center(
               child: Container(
-                height: 70,
-                decoration: BoxDecoration(
-                  color: Color(0xff333333).withOpacity(0.84),
-                  borderRadius: BorderRadius.circular(20),
+                width: width < 500 ? width : 450,
+                color: Colors.transparent,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                    color: Color(0xff333333).withOpacity(0.84),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ...navBtns.map((e) {
+                          return InkWell(
+                              onTap: () {
+                                print(e.img);
+                                navBtns.forEach((element) {
+                                  element.selected = false;
+                                });
+                                e.selected = true;
+                                setState(() {});
+                              },
+                              child: e.selected
+                                  ? NavButtom(
+                                      img: e.img,
+                                      selected: e.selected,
+                                    )
+                                  : SizedBox(
+                                      child: Image.asset(e.img,
+                                          height: 20,
+                                          width: 20,
+                                          fit: BoxFit.cover),
+                                    ));
+                        }).toList(),
+                        SizedBox(width: 5),
+                      ]),
                 ),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ...navBtns.map((e) {
-                        return InkWell(
-                            onTap: () {
-                              print(e.img);
-                              navBtns.forEach((element) {
-                                element.selected = false;
-                              });
-                              e.selected = true;
-                              setState(() {});
-                            },
-                            child: e.selected
-                                ? NavButtom(
-                                    img: e.img,
-                                    selected: e.selected,
-                                  )
-                                : SizedBox(
-                                    child: Image.asset(e.img,
-                                        height: 20,
-                                        width: 20,
-                                        fit: BoxFit.cover),
-                                  ));
-                      }).toList(),
-                      SizedBox(width: 5),
-                    ]),
               ),
             ),
           ),
