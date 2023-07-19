@@ -25,7 +25,7 @@ class ItemDetails extends StatelessWidget {
         child: Stack(
           children: [
             SizedBox(
-              height: width < 400 ? height + 500 : height + 300,
+              height: width < 360 ? 1150 : 1050,
               // height: double.minPositive,
             ),
             Image.asset(
@@ -423,7 +423,7 @@ class Option extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: screenWidth < 400 ? null : Get.width * 0.40,
+      width: screenWidth < 360 ? null : Get.width * 0.40,
       child: Row(
         children: [
           Switch(value: isSelected, onChanged: (val) {}),
@@ -432,9 +432,9 @@ class Option extends StatelessWidget {
           ),
           Text(
             milk,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white60,
-              fontSize: 12,
+              fontSize: screenWidth < 400 ? 10 : 12,
             ),
           ),
         ],
